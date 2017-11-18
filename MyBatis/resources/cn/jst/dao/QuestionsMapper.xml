@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="cn.jst.dao.QuestionsMapper">
+<!-- <resultMap type="answer" id="ansMap">
+   <id property = "id" column="id"/>
+   <result property="answerContent" column="answerContent"/>
+   <result property="ansDate" column="ansDate"/>
+ </resultMap> -->
+<resultMap type="questions" id = "questionsMap" >
+   <id property = "id" column="id"/>
+   <result property="answerCount" column="answerCount"/>
+   <result property="datailDesc" column="datailDesc"/>
+   <result property="lasModifed" column="lasModifed"/>
+   <result property="title" column="title"/>
+   <collection property="an" ofType="answer" resultMap="ansMap">
+   </collection>
+</resultMap>
+<resultMap type="answer" id="ansMap">
+   <id property = "id" column="id"/>
+   <result property="answerContent" column="answerContent"/>
+   <result property="ansDate" column="ansDate"/>
+ </resultMap>
+<select id="queryList" resultMap="questionsMap" flushCache="true">
+  select title , ans.ansContent from questions  que
+  left JOIN answer ans
+  on que.id =  ans.id  
+</select>
+</mapper>
