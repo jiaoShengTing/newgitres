@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.pamper.mapper.EquipmentMapper">
+  <resultMap type="equipment" id="equipmentMap">
+    <id property="id" column="id" />   
+    <result property="model" column="model"/>
+    <result property="price" column="price"/>
+    <result property="date" column="date"/>
+  </resultMap>
+<select id="queryList" resultMap="equipmentMap">  
+  select * from equipment
+</select>
+
+<insert id="addEquipment" parameterType="equipment">
+ insert into equipment (model,price,date)
+ value (#{model},#{price},#{date})
+</insert>
+<select id="queryById" resultMap="equipmentMap" parameterType="int">
+  select * from equipment 
+  where id = #{id}
+</select>
+
+<update id="updateEqu" parameterType="equipment">
+  update from equipment 
+  set model = #{model}
+      price = #{price}
+      date = #{date}
+  where id = #{id}
+</update>
+
+</mapper>
